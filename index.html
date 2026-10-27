@@ -9,34 +9,28 @@
 
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #ffffff;
       --card: #ffffff;
-      --fg: #1e293b;
-      --muted: #64748b;
-      --tile: #eef2f7;
-      --line: #e2e8f0;
-      --accent: #5b7cfa;
-      --accent-soft: #e4eaff;
-      --accent-ink: #3b5bdb;
-      --p1: #e4eaff;
-      --p2: #fde7f1;
-      --p3: #dcf7ea;
+      --fg: #111111;
+      --muted: #6b7280;
+      --tile: #f5f5f7;
+      --line: #ececec;
+      --accent: #111111;
+      --on-accent: #ffffff;
+      --hover: #f0f0f2;
       --r: 18px;
       --font: "Inter", "Segoe UI", Arial, sans-serif;
     }
     [data-theme="dark"] {
-      --bg: #0f172a;
-      --card: #1b2540;
-      --fg: #e8edf7;
-      --muted: #94a3b8;
-      --tile: #1b2540;
-      --line: #2b3858;
-      --accent: #7c93ff;
-      --accent-soft: #26335c;
-      --accent-ink: #c7d2fe;
-      --p1: #26335c;
-      --p2: #3b2840;
-      --p3: #1f3a35;
+      --bg: #0b0b0c;
+      --card: #141416;
+      --fg: #f5f5f7;
+      --muted: #9ca3af;
+      --tile: #1c1c1f;
+      --line: #2a2a2e;
+      --accent: #f5f5f7;
+      --on-accent: #111111;
+      --hover: #232326;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,22 +49,22 @@
       position: sticky; top: 0; z-index: 20;
       display: flex; align-items: center; gap: 20px;
       padding: 14px 32px;
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
     .logo { font-weight: 800; font-size: 1.3rem; letter-spacing: -.04em; color: var(--fg); text-decoration: none; }
     .topbar input {
       flex: 1; max-width: 400px; margin: 0 auto;
-      padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--card);
+      padding: 10px 18px; border: 0; border-radius: 999px; background: var(--tile);
     }
     .topbar input::placeholder { color: var(--muted); }
     .ghost-btn {
       display: flex; align-items: center; gap: 8px;
       padding: 8px 12px; border: 0; border-radius: 999px; background: none; font-weight: 600;
     }
-    .ghost-btn:hover { background: var(--accent-soft); }
-    .badge { min-width: 22px; padding: 1px 7px; border-radius: 999px; background: var(--accent); color: #fff; font-size: .8rem; text-align: center; }
+    .ghost-btn:hover { background: var(--hover); }
+    .badge { min-width: 22px; padding: 1px 7px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: .8rem; text-align: center; }
 
     /* Hero */
     .hero {
@@ -78,50 +72,49 @@
       display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; align-items: center;
     }
     .hero h1 { font-weight: 800; letter-spacing: -.045em; line-height: 1.02; font-size: clamp(2.6rem, 7vw, 5.2rem); }
-    .word {
-      display: inline-block; color: var(--accent-ink); border-bottom: .08em solid var(--accent);
-      transition: opacity .25s, transform .25s;
-    }
+    .word { display: inline-block; border-bottom: .08em solid var(--accent); transition: opacity .25s, transform .25s; }
     .word.out { opacity: 0; transform: translateY(.25em); }
     .hero p { max-width: 44ch; margin: 24px 0 32px; color: var(--muted); font-size: 1.1rem; }
     .hero-art { position: relative; height: 380px; }
     .f {
       position: absolute; display: grid; place-items: center; border-radius: 50%;
+      background: var(--tile); border: 1px solid var(--line);
       animation: bob 5s ease-in-out infinite; transition: translate .2s ease-out;
     }
-    .f1 { width: 230px; height: 230px; font-size: 6.5rem; left: 8%; top: 0; background: var(--p1); }
-    .f2 { width: 150px; height: 150px; font-size: 4rem; right: 0; top: 42%; background: var(--p2); animation-delay: -1.5s; }
-    .f3 { width: 120px; height: 120px; font-size: 3rem; left: 0; bottom: 0; background: var(--p3); animation-delay: -3s; }
+    .f svg { width: 64%; height: 64%; }
+    .f1 { width: 240px; height: 240px; left: 8%; top: 0; }
+    .f2 { width: 160px; height: 160px; right: 0; top: 42%; animation-delay: -1.5s; }
+    .f3 { width: 130px; height: 130px; left: 0; bottom: 0; animation-delay: -3s; }
     @keyframes bob { 50% { transform: translateY(-16px); } }
 
     /* Buttons */
     .btn {
       display: inline-block; padding: 13px 26px;
       border: 1px solid var(--accent); border-radius: 999px;
-      background: var(--accent); color: #fff;
+      background: var(--accent); color: var(--on-accent);
       font-weight: 600; text-decoration: none; text-align: center;
       transition: background .15s, color .15s, transform .1s;
     }
-    .btn:hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .btn:hover { background: var(--card); color: var(--accent); }
     .btn:active { transform: scale(.97); }
     .btn-full { width: 100%; }
 
     /* Marquee */
-    .marquee { overflow: hidden; border-block: 1px solid var(--line); padding: 16px 0; background: var(--card); }
+    .marquee { overflow: hidden; border-block: 1px solid var(--line); padding: 16px 0; }
     .track { display: flex; width: max-content; gap: 32px; animation: slide 28s linear infinite; font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; }
-    .track span:nth-child(odd) { -webkit-text-stroke: 1px var(--accent); color: transparent; }
-    .track span:nth-child(even) { color: var(--accent); }
+    .track span:nth-child(odd) { -webkit-text-stroke: 1px var(--fg); color: transparent; }
     @keyframes slide { to { transform: translateX(-50%); } }
 
     /* Deal */
     .deal {
       max-width: 1036px; margin: 64px auto; display: flex; align-items: center; gap: 28px;
-      padding: 28px 40px; border-radius: 24px; background: var(--accent-soft); color: var(--fg);
+      padding: 28px 40px; border-radius: 24px; background: var(--tile); border: 1px solid var(--line);
     }
-    .deal-icon { display: grid; place-items: center; width: 92px; height: 92px; border-radius: 50%; background: var(--card); font-size: 3.2rem; }
+    .deal-icon { display: grid; place-items: center; width: 110px; height: 110px; flex: none; border-radius: 50%; background: var(--card); }
+    .deal-icon svg { width: 78%; height: 78%; }
     .deal-info { flex: 1; }
     .deal-tag { font-size: .9rem; color: var(--muted); }
-    .deal-tag b { font-variant-numeric: tabular-nums; color: var(--accent-ink); }
+    .deal-tag b { font-variant-numeric: tabular-nums; color: var(--fg); }
     .deal h2 { font-size: 1.8rem; letter-spacing: -.03em; }
     .deal s { color: var(--muted); margin-right: 6px; }
 
@@ -131,7 +124,7 @@
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip { padding: 8px 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); font-weight: 500; transition: border-color .15s; }
     .chip:hover { border-color: var(--accent); }
-    .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
     .sort { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .95rem; }
     .sort select { padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
 
@@ -142,15 +135,13 @@
       position: relative; aspect-ratio: 1 / 1; display: grid; place-items: center; overflow: hidden;
       border-radius: var(--r); background: var(--tile); cursor: pointer;
     }
-    .card:nth-child(3n+1) .card-img { background: var(--p1); }
-    .card:nth-child(3n+2) .card-img { background: var(--p2); }
-    .card:nth-child(3n) .card-img { background: var(--p3); }
-    .ico { font-size: 5rem; transition: transform .35s cubic-bezier(.3, 1.5, .5, 1); }
-    .card:hover .ico { transform: scale(1.14) rotate(-7deg); }
-    .tag { position: absolute; top: 12px; left: 12px; padding: 3px 10px; border-radius: 999px; background: var(--card); color: var(--accent-ink); font-size: .78rem; font-weight: 600; }
+    .ico { display: grid; place-items: center; width: 72%; height: 72%; transition: transform .35s cubic-bezier(.3, 1.5, .5, 1); }
+    .ico svg, .ico img { width: 100%; height: 100%; object-fit: contain; }
+    .card:hover .ico { transform: scale(1.08) rotate(-3deg); }
+    .tag { position: absolute; top: 12px; left: 12px; padding: 3px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: .78rem; font-weight: 600; }
     .wish {
       position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; border: 0; border-radius: 50%;
-      background: var(--card); color: var(--accent-ink); font-size: 1.1rem; line-height: 1; transition: transform .15s;
+      background: var(--card); font-size: 1.1rem; line-height: 1; transition: transform .15s;
     }
     .wish:hover { transform: scale(1.15); }
     .qv {
@@ -170,14 +161,14 @@
     .empty { padding: 56px 0; text-align: center; color: var(--muted); }
 
     /* Quick view modal */
-    .modal { position: fixed; inset: 0; z-index: 45; display: grid; place-items: center; padding: 20px; background: rgba(15, 23, 42, .4); backdrop-filter: blur(3px); }
+    .modal { position: fixed; inset: 0; z-index: 45; display: grid; place-items: center; padding: 20px; background: rgba(0, 0, 0, .35); backdrop-filter: blur(3px); }
     .modal[hidden] { display: none; }
     .modal-card { position: relative; width: min(760px, 100%); max-height: 92vh; overflow: auto; border-radius: 24px; background: var(--card); animation: pop .25s ease; }
     @keyframes pop { from { opacity: 0; transform: scale(.94); } }
     .modal-x { position: absolute; top: 14px; right: 14px; z-index: 2; }
     .modal-body { display: grid; grid-template-columns: 1fr 1fr; }
-    .m-img { display: grid; place-items: center; min-height: 320px; background: var(--p1); }
-    .m-img .ico { font-size: 8rem; }
+    .m-img { display: grid; place-items: center; min-height: 320px; background: var(--tile); }
+    .m-img .ico { width: 68%; height: auto; aspect-ratio: 1; }
     .m-info { display: flex; flex-direction: column; gap: 10px; padding: 36px 28px; }
     .m-info h2 { font-size: 1.7rem; letter-spacing: -.03em; line-height: 1.1; }
     .m-info ul { list-style: none; border-top: 1px solid var(--line); }
@@ -188,26 +179,27 @@
     .m-actions .wish { position: static; width: 48px; height: 48px; border: 1px solid var(--line); }
 
     /* Cart drawer */
-    .overlay { position: fixed; inset: 0; z-index: 30; background: rgba(15, 23, 42, .35); }
+    .overlay { position: fixed; inset: 0; z-index: 30; background: rgba(0, 0, 0, .3); }
     .drawer {
       position: fixed; top: 0; right: 0; z-index: 40; width: min(420px, 100%); height: 100%;
       display: flex; flex-direction: column; background: var(--card);
       transform: translateX(100%); transition: transform .3s ease;
-      box-shadow: -12px 0 40px rgba(15, 23, 42, .08);
+      box-shadow: -12px 0 40px rgba(0, 0, 0, .08);
     }
     .drawer.open { transform: none; }
     .drawer-head, .drawer-foot { padding: 22px 24px; }
     .drawer-head { display: flex; justify-content: space-between; align-items: center; }
     .drawer-head h2 { font-size: 1.2rem; letter-spacing: -.02em; }
     .icon-btn { border: 0; background: none; font-size: 1.1rem; padding: 6px 10px; border-radius: 50%; }
-    .icon-btn:hover { background: var(--accent-soft); }
+    .icon-btn:hover { background: var(--hover); }
     .ship { padding: 0 24px 16px; border-bottom: 1px solid var(--line); font-size: .9rem; color: var(--muted); }
     .bar { height: 6px; margin-top: 8px; border-radius: 99px; background: var(--tile); overflow: hidden; }
     .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .4s ease; }
     .cart-items { flex: 1; overflow-y: auto; padding: 4px 24px; }
     .cart-empty { padding: 56px 0; text-align: center; color: var(--muted); }
-    .cart-row { display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
-    .cart-icon { display: grid; place-items: center; height: 56px; font-size: 1.8rem; border-radius: 12px; background: var(--p1); }
+    .cart-row { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .cart-icon { display: grid; place-items: center; height: 64px; border-radius: 12px; background: var(--tile); }
+    .cart-icon svg, .cart-icon img { width: 82%; height: 82%; object-fit: contain; }
     .cart-row h4 { font-size: .95rem; font-weight: 600; }
     .cart-row small { color: var(--muted); }
     .qty { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
@@ -219,12 +211,12 @@
 
     .toast {
       position: fixed; left: 50%; bottom: 28px; z-index: 70; padding: 12px 22px; border-radius: 999px;
-      background: var(--fg); color: var(--bg); font-size: .95rem;
+      background: var(--accent); color: var(--on-accent); font-size: .95rem;
       transform: translate(-50%, 120px); transition: transform .3s ease;
     }
     .toast.show { transform: translate(-50%, 0); }
 
-    .confetti { position: fixed; top: -20px; z-index: 60; width: 8px; height: 14px; border-radius: 2px; background: var(--c, var(--accent)); animation: fall 2.4s ease-in forwards; pointer-events: none; }
+    .confetti { position: fixed; top: -20px; z-index: 60; width: 8px; height: 14px; border-radius: 2px; background: var(--c, #111); animation: fall 2.4s ease-in forwards; pointer-events: none; }
     @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
 
     .footer { padding: 32px; text-align: center; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
@@ -239,7 +231,7 @@
       .deal { margin: 48px 20px; flex-wrap: wrap; padding: 24px; }
       .shop { padding: 0 20px; }
       .modal-body { grid-template-columns: 1fr; }
-      .m-img { min-height: 220px; }
+      .m-img { min-height: 240px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -267,9 +259,9 @@
         <a href="#shop" class="btn">Start browsing</a>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <span class="f f1" data-depth="40">📱</span>
-        <span class="f f2" data-depth="-60">🎧</span>
-        <span class="f f3" data-depth="70">⌚</span>
+        <span class="f f1" data-depth="40" data-art="phone" data-c="#111827"></span>
+        <span class="f f2" data-depth="-60" data-art="headphones" data-c="#374151"></span>
+        <span class="f f3" data-depth="70" data-art="watch" data-c="#60a5fa"></span>
       </div>
     </section>
 
@@ -283,7 +275,7 @@
     </div>
 
     <section class="deal">
-      <div class="deal-icon" aria-hidden="true">📱</div>
+      <div class="deal-icon" aria-hidden="true" data-art="phone" data-c="#111827"></div>
       <div class="deal-info">
         <span class="deal-tag">Deal of the day, ends in <b id="countdown">00:00:00</b></span>
         <h2>Nova X Pro</h2>
@@ -343,20 +335,40 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
+    // ---------- Product images (drawn as SVG, so no files or downloads are needed) ----------
+    const ST = 'stroke="rgba(0,0,0,.14)" stroke-width="1.5"';
+    const ART = {
+      phone: (c) => `<rect x="62" y="16" width="76" height="164" rx="15" fill="${c}" ${ST}/><rect x="67" y="21" width="66" height="154" rx="11" fill="#1e293b"/><circle cx="100" cy="100" r="26" fill="${c}" opacity=".6"/><rect x="90" y="27" width="20" height="5" rx="2.5" fill="#000"/>`,
+      fold: (c) => `<rect x="60" y="18" width="80" height="78" rx="15" fill="${c}" ${ST}/><rect x="65" y="23" width="70" height="68" rx="11" fill="#1e293b"/><rect x="60" y="104" width="80" height="78" rx="15" fill="${c}" ${ST}/><rect x="65" y="109" width="70" height="68" rx="11" fill="#1e293b"/><circle cx="100" cy="143" r="20" fill="${c}" opacity=".6"/>`,
+      buds: (c) => `<g fill="#fff" stroke="rgba(0,0,0,.18)" stroke-width="1.5"><circle cx="76" cy="52" r="17"/><rect x="69" y="62" width="14" height="40" rx="7"/><circle cx="124" cy="52" r="17"/><rect x="117" y="62" width="14" height="40" rx="7"/></g><rect x="48" y="108" width="104" height="66" rx="28" fill="${c}" ${ST}/><path d="M48 138h104" stroke="rgba(0,0,0,.14)" stroke-width="2"/><circle cx="100" cy="150" r="4" fill="#111"/>`,
+      headphones: (c) => `<path d="M46 112a54 54 0 0 1 108 0" fill="none" stroke="${c}" stroke-width="12" stroke-linecap="round"/><rect x="34" y="104" width="32" height="58" rx="14" fill="${c}" ${ST}/><rect x="134" y="104" width="32" height="58" rx="14" fill="${c}" ${ST}/><rect x="52" y="114" width="10" height="38" rx="5" fill="#0f172a" opacity=".5"/><rect x="138" y="114" width="10" height="38" rx="5" fill="#0f172a" opacity=".5"/>`,
+      speaker: (c) => `<rect x="32" y="66" width="136" height="74" rx="37" fill="${c}" ${ST}/><g fill="#0f172a" opacity=".75"><circle cx="70" cy="103" r="5"/><circle cx="86" cy="103" r="5"/><circle cx="102" cy="103" r="5"/><circle cx="118" cy="103" r="5"/><circle cx="134" cy="103" r="5"/></g><circle cx="100" cy="82" r="4" fill="#fff" opacity=".8"/>`,
+      watch: (c) => `<rect x="78" y="8" width="44" height="184" rx="16" fill="${c}" ${ST}/><rect x="56" y="50" width="88" height="100" rx="26" fill="#111"/><rect x="62" y="56" width="76" height="88" rx="21" fill="#1e293b"/><circle cx="100" cy="100" r="22" fill="none" stroke="${c}" stroke-width="6"/><circle cx="100" cy="100" r="3" fill="#fff"/><rect x="144" y="86" width="6" height="22" rx="3" fill="#111"/>`,
+      charger: (c) => `<rect x="82" y="28" width="8" height="24" rx="2" fill="#9ca3af"/><rect x="110" y="28" width="8" height="24" rx="2" fill="#9ca3af"/><rect x="60" y="50" width="80" height="92" rx="18" fill="${c}" ${ST}/><circle cx="100" cy="78" r="8" fill="#fff" opacity=".7"/><rect x="80" y="104" width="40" height="11" rx="5.5" fill="#0f172a" opacity=".8"/><rect x="80" y="122" width="40" height="11" rx="5.5" fill="#0f172a" opacity=".8"/>`,
+      powerbank: (c) => `<rect x="60" y="26" width="80" height="148" rx="18" fill="${c}" ${ST}/><g fill="#fff" opacity=".85"><circle cx="80" cy="54" r="5"/><circle cx="94" cy="54" r="5"/><circle cx="108" cy="54" r="5"/><circle cx="122" cy="54" r="5" opacity=".4"/></g><rect x="76" y="98" width="48" height="6" rx="3" fill="#fff" opacity=".6"/><rect x="88" y="152" width="24" height="8" rx="4" fill="#0f172a" opacity=".8"/>`,
+      case: (c) => `<rect x="56" y="12" width="88" height="176" rx="22" fill="${c}" ${ST}/><rect x="63" y="19" width="74" height="162" rx="16" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2"/><rect x="68" y="26" width="38" height="38" rx="11" fill="#0f172a" opacity=".85"/><circle cx="80" cy="38" r="6" fill="#52525b"/><circle cx="94" cy="52" r="6" fill="#52525b"/>`
+    };
+    const art = (type, c) =>
+      `<svg viewBox="0 0 200 200" role="img" aria-label="${type}"><ellipse cx="100" cy="192" rx="52" ry="5" fill="#000" opacity=".08"/>${ART[type](c || "#111827")}</svg>`;
+
+    // Uses a real photo if the product has an "img" field, otherwise the drawing above
+    const pic = (p) => (p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy">` : art(p.type, p.c));
+
     // ---------- Product data (edit this list to add your own products) ----------
+    // Optional: add  img: "images/my-photo.jpg"  to any product to use a real photo.
     const products = [
-      { id: 1,  name: "Nova X Pro",         category: "Phones",      price: 34999, old: 39999, rating: 4.6, icon: "📱", isNew: true, tag: "Flagship power with all-day battery.", specs: ["6.7 inch AMOLED, 120 Hz", "12 GB RAM, 256 GB storage", "50 MP triple camera"] },
-      { id: 2,  name: "Pixelon 8a",         category: "Phones",      price: 27999, old: 31999, rating: 4.4, icon: "📱", tag: "Clean software and a camera that punches above its price.", specs: ["6.1 inch OLED, 90 Hz", "8 GB RAM, 128 GB storage", "64 MP dual camera"] },
-      { id: 3,  name: "Orbit Lite 5G",      category: "Phones",      price: 13999, old: 15999, rating: 4.2, icon: "📱", tag: "5G for everyone, without the premium price.", specs: ["6.5 inch LCD, 90 Hz", "6 GB RAM, 128 GB storage", "5000 mAh battery"] },
-      { id: 4,  name: "Flip Z Mini",        category: "Phones",      price: 54999, old: 62999, rating: 4.5, icon: "📲", tag: "A pocket-sized foldable that opens into a full screen.", specs: ["6.7 inch foldable AMOLED", "8 GB RAM, 256 GB storage", "Cover display"] },
-      { id: 5,  name: "AirBeat Buds",       category: "Audio",       price: 2499,  old: 3499,  rating: 4.3, icon: "🎧", tag: "Wireless earbuds with active noise cancellation.", specs: ["Active noise cancellation", "30 hours with case", "IPX4 water resistance"] },
-      { id: 6,  name: "BassMax Headphones", category: "Audio",       price: 5999,  old: 7499,  rating: 4.5, icon: "🎧", tag: "Over-ear comfort with deep, punchy bass.", specs: ["40 mm drivers", "50 hours battery", "Bluetooth 5.3"] },
-      { id: 7,  name: "PocketBoom Speaker", category: "Audio",       price: 1799,  old: 2299,  rating: 4.1, icon: "🔊", tag: "Small enough for your bag, loud enough for a party.", specs: ["12 W stereo sound", "12 hours playtime", "Splash proof"] },
-      { id: 8,  name: "FitPulse Watch",     category: "Wearables",   price: 3999,  old: 5499,  rating: 4.2, icon: "⌚", tag: "Track workouts, sleep and heart rate on a bright display.", specs: ["1.7 inch AMOLED", "7 day battery", "100+ sport modes"] },
-      { id: 9,  name: "Chrono Ultra",       category: "Wearables",   price: 12999, old: 14999, rating: 4.7, icon: "⌚", isNew: true, tag: "A rugged smartwatch with built-in GPS.", specs: ["Titanium case", "Dual-band GPS", "14 day battery"] },
-      { id: 10, name: "VoltCharge 65W",     category: "Accessories", price: 999,   old: 1499,  rating: 4.4, icon: "🔌", tag: "One fast charger for your phone and laptop.", specs: ["65 W GaN technology", "2 USB-C and 1 USB-A", "Compact design"] },
-      { id: 11, name: "PowerBank 20000mAh", category: "Accessories", price: 1699,  old: 2199,  rating: 4.3, icon: "🔋", tag: "Charge your phone four times over.", specs: ["20000 mAh capacity", "22.5 W fast charging", "Slim aluminium body"] },
-      { id: 12, name: "ShieldCase Pro",     category: "Accessories", price: 499,   old: 799,   rating: 4.0, icon: "🛡️", tag: "Slim protection that survives drops.", specs: ["Military-grade drop tested", "Raised camera edge", "Wireless charging friendly"] }
+      { id: 1,  name: "Nova X Pro",         category: "Phones",      type: "phone",      c: "#111827", price: 34999, old: 39999, rating: 4.6, isNew: true, tag: "Flagship power with all-day battery.", specs: ["6.7 inch AMOLED, 120 Hz", "12 GB RAM, 256 GB storage", "50 MP triple camera"] },
+      { id: 2,  name: "Pixelon 8a",         category: "Phones",      type: "phone",      c: "#7c9cff", price: 27999, old: 31999, rating: 4.4, tag: "Clean software and a camera that punches above its price.", specs: ["6.1 inch OLED, 90 Hz", "8 GB RAM, 128 GB storage", "64 MP dual camera"] },
+      { id: 3,  name: "Orbit Lite 5G",      category: "Phones",      type: "phone",      c: "#34d399", price: 13999, old: 15999, rating: 4.2, tag: "5G for everyone, without the premium price.", specs: ["6.5 inch LCD, 90 Hz", "6 GB RAM, 128 GB storage", "5000 mAh battery"] },
+      { id: 4,  name: "Flip Z Mini",        category: "Phones",      type: "fold",       c: "#f472b6", price: 54999, old: 62999, rating: 4.5, tag: "A pocket-sized foldable that opens into a full screen.", specs: ["6.7 inch foldable AMOLED", "8 GB RAM, 256 GB storage", "Cover display"] },
+      { id: 5,  name: "AirBeat Buds",       category: "Audio",       type: "buds",       c: "#f4f4f5", price: 2499,  old: 3499,  rating: 4.3, tag: "Wireless earbuds with active noise cancellation.", specs: ["Active noise cancellation", "30 hours with case", "IPX4 water resistance"] },
+      { id: 6,  name: "BassMax Headphones", category: "Audio",       type: "headphones", c: "#374151", price: 5999,  old: 7499,  rating: 4.5, tag: "Over-ear comfort with deep, punchy bass.", specs: ["40 mm drivers", "50 hours battery", "Bluetooth 5.3"] },
+      { id: 7,  name: "PocketBoom Speaker", category: "Audio",       type: "speaker",    c: "#fb923c", price: 1799,  old: 2299,  rating: 4.1, tag: "Small enough for your bag, loud enough for a party.", specs: ["12 W stereo sound", "12 hours playtime", "Splash proof"] },
+      { id: 8,  name: "FitPulse Watch",     category: "Wearables",   type: "watch",      c: "#60a5fa", price: 3999,  old: 5499,  rating: 4.2, tag: "Track workouts, sleep and heart rate on a bright display.", specs: ["1.7 inch AMOLED", "7 day battery", "100+ sport modes"] },
+      { id: 9,  name: "Chrono Ultra",       category: "Wearables",   type: "watch",      c: "#9ca3af", price: 12999, old: 14999, rating: 4.7, isNew: true, tag: "A rugged smartwatch with built-in GPS.", specs: ["Titanium case", "Dual-band GPS", "14 day battery"] },
+      { id: 10, name: "VoltCharge 65W",     category: "Accessories", type: "charger",    c: "#f4f4f5", price: 999,   old: 1499,  rating: 4.4, tag: "One fast charger for your phone and laptop.", specs: ["65 W GaN technology", "2 USB-C and 1 USB-A", "Compact design"] },
+      { id: 11, name: "PowerBank 20000mAh", category: "Accessories", type: "powerbank",  c: "#1f2937", price: 1699,  old: 2199,  rating: 4.3, tag: "Charge your phone four times over.", specs: ["20000 mAh capacity", "22.5 W fast charging", "Slim aluminium body"] },
+      { id: 12, name: "ShieldCase Pro",     category: "Accessories", type: "case",       c: "#a78bfa", price: 499,   old: 799,   rating: 4.0, tag: "Slim protection that survives drops.", specs: ["Military-grade drop tested", "Raised camera edge", "Wireless charging friendly"] }
     ];
 
     const FREE_SHIP = 5000;
@@ -435,7 +447,7 @@
           return `
           <article class="card" style="--i:${i % 4}">
             <div class="card-img" data-view="${p.id}">
-              <span class="ico" aria-hidden="true">${p.icon}</span>
+              <span class="ico">${pic(p)}</span>
               <span class="tag">${p.isNew ? "New" : "-" + off + "%"}</span>
               <button class="wish" data-wish="${p.id}" aria-label="Save ${p.name}">${heart(p.id)}</button>
               <button class="qv" data-view="${p.id}">Quick view</button>
@@ -461,7 +473,7 @@
     function openModal(id) {
       const p = findProduct(id);
       $("#modalBody").innerHTML = `
-        <div class="m-img"><span class="ico">${p.icon}</span></div>
+        <div class="m-img"><span class="ico">${pic(p)}</span></div>
         <div class="m-info">
           <span class="card-cat">${p.category}</span>
           <h2>${p.name}</h2>
@@ -504,7 +516,7 @@
         total += p.price * qty;
         return `
           <div class="cart-row">
-            <div class="cart-icon">${p.icon}</div>
+            <div class="cart-icon">${pic(p)}</div>
             <div>
               <h4>${p.name}</h4>
               <small>${money(p.price)} each</small>
@@ -556,7 +568,7 @@
     }
 
     function confetti() {
-      const colors = ["#5b7cfa", "#f472b6", "#34d399", "#fbbf24"];
+      const colors = ["#111111", "#9ca3af", "#60a5fa", "#f472b6", "#34d399"];
       for (let i = 0; i < 44; i++) {
         const c = document.createElement("span");
         c.className = "confetti";
@@ -570,6 +582,8 @@
     }
 
     // ---------- Hero effects ----------
+    document.querySelectorAll("[data-art]").forEach((el) => { el.innerHTML = art(el.dataset.art, el.dataset.c); });
+
     const words = ["phone", "watch", "pair of earbuds", "charger", "gadget"];
     let wordIndex = 0;
     setInterval(() => {
